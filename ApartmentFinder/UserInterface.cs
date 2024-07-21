@@ -1,19 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using ApartmentFinder.Models;
 
 namespace ApartmentFinder.UI
 {
     public class UserInterface
     {
-        public void DisplayListings(List<ApartmentListing> listings)
+        public void DisplayMenu()
         {
-            foreach (var listing in listings)
+            Console.WriteLine("DisplayMenu called.");
+            // Implementation of the method
+            Console.WriteLine("Welcome to the Apartment Finder!");
+            Console.WriteLine("1. Search for apartments");
+            Console.WriteLine("2. Exit");
+        }
+
+        public void DisplayMessage(string message)
+        {
+            Console.WriteLine("DisplayMessage called with message: " + message);
+
+            if (string.IsNullOrEmpty(message))
             {
-                Console.WriteLine($"Title: {listing.Title}");
-                Console.WriteLine($"Price: {listing.Price}");
-                Console.WriteLine($"Address: {listing.Address}");
-                Console.WriteLine(new string('-', 20));
+                Console.WriteLine("No message to display.");
+            }
+            else
+            {
+                Console.WriteLine(message);
             }
         }
     }

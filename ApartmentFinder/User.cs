@@ -2,8 +2,13 @@
 {
     public class User
     {
-        public string Name { get; set; }
+        public string Username { get; set; }
         public UserPreferences Preferences { get; set; }
-        // Add more fields as necessary
+
+        public User()
+        {
+            Username = string.Empty; // Initialize with a default value
+            Preferences = new UserPreferences(); // Initialize with a default value
+        }
     }
 }

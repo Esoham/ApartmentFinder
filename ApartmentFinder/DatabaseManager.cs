@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using ApartmentFinder.Models;
-using Microsoft.VisualBasic;
 
 namespace ApartmentFinder.Services
 {
@@ -39,14 +38,21 @@ namespace ApartmentFinder.Services
                 {
                     while (reader.Read())
                     {
-                        var listing = new ApartmentListing
+                        var title = reader["Title"]?.ToString();
+                        var price = reader["Price"]?.ToString();
+                        var address = reader["Address"]?.ToString();
+
+                        if (!string.IsNullOrEmpty(title) && !string.IsNullOrEmpty(price) && !string.IsNullOrEmpty(address))
                         {
-                            Title = reader["Title"].ToString(),
-                            Price = reader["Price"].ToString(),
-                            Address = reader["Address"].ToString(),
-                            // Add more fields as necessary
-                        };
-                        listings.Add(listing);
+                            var listing = new ApartmentListing
+                            {
+                                Title = title,
+                                Price = price,
+                                Address = address,
+                                // Add more fields as necessary
+                            };
+                            listings.Add(listing);
+                        }
                     }
                 }
             }

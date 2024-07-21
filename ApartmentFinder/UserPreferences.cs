@@ -3,8 +3,10 @@
     public class UserPreferences
     {
         public string PreferredLocation { get; set; }
-        public int MaxPrice { get; set; }
-        public int MinBedrooms { get; set; }
-        // Add more fields as necessary
+
+        public UserPreferences()
+        {
+            PreferredLocation = string.Empty; // or any default value you prefer
+        }
     }
 }
