@@ -6,6 +6,12 @@ ApartmentFinder started as a C# project to help people find apartments. The goal
 
 > **Current status:** The new web interface uses eight **fictional, sample listings**. All example prices, location descriptors and amenity tags are synthetic. This is not a live apartment aggregator; it does not display verified availability, accept rental applications, or connect renters with property managers.
 
+## Public web demonstration
+
+**[Open ApartmentFinder's interactive sample demo](https://esoham.github.io/projects/apartmentfinder/)** — hosted on the existing portfolio GitHub Pages site. The demo has clearly labeled fictional rental examples and is not connected to live apartment listings.
+
+Source for the deployed interface: [portfolio demo folder](https://github.com/Esoham/Esoham.github.io/tree/main/projects/apartmentfinder).
+
 ## Try the web demo locally
 
 Requires Python 3 or another static file server:
