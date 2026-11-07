@@ -25,5 +25,7 @@ jobs:
       - name: Validate JavaScript syntax
         run: |
           node --check web/app.mjs
+          node --check web/live.mjs
+          node --check web/live-utils.mjs
           node --check web/listings.mjs
           node --check web/logic.mjs
