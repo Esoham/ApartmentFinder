@@ -12,12 +12,14 @@ export function monthlyEstimate(home, includePetRent = false) {
 
 export function filterHomes(homes, filters = {}) {
   const city = (filters.city ?? "").toString().trim().toLocaleLowerCase("en-US");
+  const zip = (filters.zip ?? "").toString().trim();
   const maxRent = normalizeBound(filters.maxRent);
   const maxMoveIn = normalizeBound(filters.maxMoveIn);
   const minBeds = Number(filters.minBeds ?? 0);
   const saved = filters.savedIds instanceof Set ? filters.savedIds : new Set();
   return homes.filter(home =>
     (!city || home.city.toLocaleLowerCase("en-US") === city) &&
+    (!zip || home.zip.startsWith(zip)) &&
     (maxRent === null || home.rent <= maxRent) &&
     (maxMoveIn === null || moveInCost(home) <= maxMoveIn) &&
     home.beds >= (Number.isFinite(minBeds) && minBeds >= 0 ? minBeds : 0) &&

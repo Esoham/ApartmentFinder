@@ -1,0 +1,29 @@
+name: ApartmentFinder web prototype tests
+on:
+  push:
+    paths:
+      - 'web/**'
+      - '.github/workflows/apartmentfinder-web-tests.yml'
+      - 'README.md'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify demo search, prices and comparison rules
+        run: node --test web/tests/*.test.mjs
+      - name: Validate JavaScript syntax
+        run: |
+          node --check web/app.mjs
+          node --check web/listings.mjs
+          node --check web/logic.mjs
