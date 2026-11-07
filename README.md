@@ -4,7 +4,7 @@
 
 ApartmentFinder started as a C# project to help people find apartments. The goal is to **make apartment searches and affordability comparisons easier for real people**, with particular attention to up-front costs that are often less obvious than advertised rent.
 
-> **Current status:** The new web interface uses eight **fictional, sample listings**. All example prices, location descriptors and amenity tags are synthetic. This is not a live apartment aggregator; it does not display verified availability, accept rental applications, or connect renters with property managers.
+> **Current status:** The demo comparison includes eight **fictional sample homes**. The site now also has an **opt-in provider-reported rental listing section** and links to independent rental marketplaces. An authorized RentCast API key has **not** been configured in the public website's source. Provider data appears only after activation and a successful refresh; unit availability is never guaranteed.
 
 ## Public web demonstration
 
@@ -20,7 +20,7 @@ Requires Python 3 or another static file server:
 python -m http.server 8000 --directory web
 ```
 
-Visit **http://127.0.0.1:8000/**. You can search by city/ZIP, rent ceiling, bedroom count, pet-friendly category, or maximum estimated move-in cost, save examples in your browser and compare three homes.
+Visit **http://127.0.0.1:8000/**. The app has separate sections: (1) authorized rental feed / original rental marketplace links, and (2) fictional demo apartments with city/ZIP, rent, bedrooms, pets, move-in budgets, favorites, and three-way comparison. Local website builds without a provider key show the `not_configured` feed status.
 
 ### Core affordability calculations
 
@@ -35,7 +35,17 @@ Actual rental quotes may also include insurance, prorated rent, tax, pet deposit
 node --test web/tests/*.test.mjs
 ```
 
-The [GitHub Actions workflow](.github/workflows/apartmentfinder-web-tests.yml) runs unit tests and syntax checks on changes. See the [product vision and Agile QA test plan](docs/PRODUCT_VISION_AND_TEST_PLAN.md) for acceptance criteria, risks and future backlog.
+The [GitHub Actions workflow](.github/workflows/apartmentfinder-web-tests.yml) runs unit tests and syntax checks on changes, including the provider-view freshness tests. See the [product vision and Agile QA test plan](docs/PRODUCT_VISION_AND_TEST_PLAN.md) for acceptance criteria, risks and future backlog.
+
+## Real rental listings integration
+
+The published site has a secure, **licensed-data integration ready for activation**. Provider: [RentCast's long-term rental listing API](https://developers.rentcast.io/reference/rental-listings-long-term). It requires the repository owner to configure a private `RENTCAST_API_KEY` secret in the `Esoham/Esoham.github.io` repository and run its refresh workflow. The public site **does not embed the key**.
+
+- [Live integration setup and cost/accuracy limitations](https://github.com/Esoham/Esoham.github.io/blob/main/projects/apartmentfinder/RENTAL_DATA_SETUP.md)
+- [Secure refresh workflow](https://github.com/Esoham/Esoham.github.io/blob/main/.github/workflows/apartmentfinder-rental-refresh.yml)
+- [Current data-source snapshot](https://github.com/Esoham/Esoham.github.io/blob/main/projects/apartmentfinder/data/live-listings.json)
+
+**Until a key is configured, the site offers official outbound rental-search links, not provider-fed listing cards.** Provider data includes only reported active status and recent timestamps, not independently verified availability or complete fee information. The sample apartment calculations must never be mistaken for quotes on real properties.
 
 ## Original C# project preserved
 
@@ -56,7 +66,7 @@ The browser prototype runs without third-party services or login and stores save
 
 ## Roadmap
 
-The next meaningful milestone is **an authorized and independently validated source of live apartment data**, followed by freshness indicators, genuine property links, accessible UI/browser testing, and continued C# modernization. Do not scrape listing sites without permission or claim fictional examples are real homes.
+The next meaningful milestone is **activating the authorized RentCast integration with a private key**, then verifying freshness, comparing against source listings, expanding authorized geography and accessible browser tests, and continuing C# modernization. Do not scrape listing sites without permission or claim fictional examples are real homes.
 
 ---
 
